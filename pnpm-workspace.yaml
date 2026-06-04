@@ -1,0 +1,7 @@
+# Single-project root (publishable @tweakcad/mcp-bridge). No workspace deps —
+# the bridge is pure relay (sdk + ws only); the tool catalogue is advertised
+# by the browser at runtime.
+packages:
+  - '.'
+allowBuilds:
+  esbuild: true

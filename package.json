@@ -1,0 +1,41 @@
+{
+  "name": "@tweakcad/mcp-bridge",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "MCP relay between an MCP client over stdio and the running TweakCAD web app over WebSocket. Pure relay — tool execution happens in the browser.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "tweakcad-mcp": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "start": "node --enable-source-maps dist/cli.js",
+    "lint": "eslint src/ tests/",
+    "test:unit": "vitest run",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.18.1",
+    "ws": "8.18.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.12.4",
+    "@types/ws": "8.18.1",
+    "typescript": "5.9.3",
+    "vitest": "2.1.9"
+  },
+  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499"
+}
