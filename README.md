@@ -149,8 +149,9 @@ rejected with the same validation messages a human would see.
 
 ## Tool surface
 
-The bridge forwards the full `@tweakcad/core` tool catalog to the connected
-MCP client. The current set:
+The bridge forwards the full `@tweakcad/core` tool catalog (~50 tools) to the
+connected MCP client, verbatim — the catalogue of record is
+`@tweakcad/core` `tools.ts` (mirrored in cad-architecture.md §34). The set:
 
 | Tool | Notes |
 |---|---|
@@ -160,7 +161,11 @@ MCP client. The current set:
 | `get_diagnostics` | Project-wide results cached via push events. Per-part queries round-trip to the browser for filtering. |
 | `dispatch_command` | Any `CadCommand` (see `@tweakcad/core/src/commands/types.ts`). Escape hatch when no wrapped tool exists. |
 | `begin_transaction` / `end_transaction` | Group multiple dispatches into one undo step. |
-| `sketch_create` / `sketch_draw_line` / `sketch_draw_rectangle` / `sketch_draw_circle` / `sketch_draw_slot` / `sketch_draw_arc` | Wrapped sketch primitives — flat JSON schemas, return new ids. |
+| `sketch_create` / `sketch_draw_line` / `sketch_draw_rectangle` / `sketch_draw_circle` / `sketch_draw_slot` / `sketch_draw_arc` / `sketch_draw_arc3point` / `sketch_draw_polygon` / `sketch_draw_ellipse` / `sketch_draw_spline` / `sketch_draw_point` | Wrapped sketch primitives — flat JSON schemas, return new ids. |
+| `sketch_apply_constraint` / `sketch_remove_constraint` | Apply / remove any of the 19 constraint kinds (one discriminated-union tool, keyed on `constraint.type`). |
+| `sketch_trim` / `sketch_extend` / `sketch_fillet` / `sketch_offset` / `sketch_mirror` | Sketch modify ops (coverage per op: trim line/arc/circle; extend line; fillet line↔line; offset line/circle; mirror line/circle/arc). |
+| `sketch_move_point` / `sketch_move_points` | Drag one or many sketch points; re-solves. |
+| `list_sketch_elements` / `sketch_pick_geometry` | Sketch id-discovery + hit-test. |
 | `feature_extrude` / `feature_revolve` / `feature_loft` / `feature_sweep` | Solid creation. `feature_extrude` and `feature_revolve` auto-pick a profile when one isn't given. |
 | `feature_fillet` / `feature_chamfer` / `feature_hole` / `feature_shell` | Edge / face modifiers. Need stable edge / face ids from `list_edges` / `list_faces` (or `find_edges` / `find_face`). |
 | `feature_mirror` / `feature_pattern` | Body replication (mirror across plane; linear / circular pattern). |
